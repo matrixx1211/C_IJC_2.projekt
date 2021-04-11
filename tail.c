@@ -8,9 +8,8 @@
 #define LINELENGTH 512
 #define LINECOUNTDEFAULT 10
 #define STDINPUT -1
-#define DEBUG printf("It goes right here.\n")
 
-/* Try to open file, if success then return ptr on file else exit(1) */
+/* Trying to open file, if success then return ptr on file else exit(1) */
 FILE *try_fopen(int fpos, char const *argv[])
 {
     FILE *f = fopen(argv[fpos], "r");
@@ -22,7 +21,7 @@ FILE *try_fopen(int fpos, char const *argv[])
     return f;
 }
 
-/* Check arguments passed on cmd line, if something is wrong then exit(1) */
+/* Checking arguments passed on cmd line, if something is wrong then exit(1) */
 void arg_check(int c, char const *arg[], bool *plus, long *n, int *fpos)
 {
     //testing count of args
@@ -55,39 +54,61 @@ void arg_check(int c, char const *arg[], bool *plus, long *n, int *fpos)
     }
 }
 
-/* counting lines */
-int count_lines(FILE *f, int fpos)
+/* Counting lines */
+int count_lines(FILE *f)
 {
-    char line[LINELENGTH];
+    //variables
+    char c;
     int lc = 0;
+
+    //go through file and count lines
     while (!feof(f))
     {
-        fgets(line, LINELENGTH, f);
-        lc++;
+        c = fgetc(f);
+        if (c == '\n' || feof(f))
+            lc++;
     }
     return lc;
 }
 
-/* print selected lines */
-int print_lines(long lc, bool plus, long n, FILE *f, int fpos)
+/* Printing selected lines */
+int print_lines(long lc, bool plus, long n, FILE *f)
 {
-    char line[LINELENGTH];
-    int begin = 0;
-
+    //variables
+    char c;
+    int begin = 0, ll = 0, cl = 0;
+    //checking if + is passed
     if (plus)
-        begin = n-1;
+        begin = n - 1;
     else
-        begin = lc-n;
-
+        begin = lc - n;
+    //set pointer on beginning of file
     fseek(f, 0, SEEK_SET);
-
-    for (size_t i = 0; i < lc; i++)
+    //printing
+    while (!feof(f))
     {
-        fgets(line, LINELENGTH, f);
-        if (i >= begin && i <= lc)
+        c = fgetc(f);
+        ll++;
+        if (cl >= begin && ll <= LINELENGTH)
         {
-            printf("%s", line);
+            if (ll == (LINELENGTH - 1))
+            {
+                c = '\n';
+                fprintf(stderr, "TAIL: Unexpected length of line.\n");
+            }
+            if (ll == LINELENGTH)
+                c = '\0';
+            printf("%c", c);
         }
+        if (c == '\n' && ll != (LINELENGTH - 1))
+        {
+            cl++;
+            ll = 0;
+        }
+        if (ll == (LINELENGTH - 1))
+            ll++;
+        if (feof(f))
+            printf("\n");
     }
 }
 
@@ -98,22 +119,16 @@ int main(int argc, char const *argv[])
     long n = LINECOUNTDEFAULT, lc = 0;
     int fpos = STDINPUT;
     bool plus = false;
-    FILE *f = NULL;
+    FILE *f = stdin;
 
+    //check if args are correctly passed
     arg_check(argc, argv, &plus, &n, &fpos);
-    if (fpos == STDINPUT)
-    {
-        char line[LINELENGTH];
-        fgets(line, LINELENGTH, stdin);
-        lc = count_lines(stdin);
-    }
-    else
-    {
+    //select stdin/file
+    if (fpos != STDINPUT)
         f = try_fopen(fpos, argv);
-        lc = count_lines(f);
-    }
-    //! vyřešit abych tam neměl 2x stejnej kód + fprintf pokud bude řádek delší jak LINELENGTH, řádek oseknout na délku danou :)
-    //! přidat fprintf když n > lc 
+    lc = count_lines(f);
+    //print output
     print_lines(lc, plus, n, f);
+
     return 0;
 }

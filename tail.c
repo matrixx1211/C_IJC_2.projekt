@@ -1,3 +1,8 @@
+// Author:      Marek Bitomský
+// Project:     IJC - 2. homework
+// Date:        20. 04. 2021
+// School:      VUT FIT Brno
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
@@ -22,15 +27,16 @@ FILE *try_fopen(int fpos, char const *argv[])
 }
 
 /* Checking arguments passed on cmd line, if something is wrong then exit(1) */
-void arg_check(int c, char const *arg[], bool *plus, long *n, int *fpos)
+void arg_check(int c, char const *arg[], bool *plus, unsigned int *n, int *fpos)
 {
     //testing count of args
     if (c >= 1 && c <= 4)
     {
-        for (size_t i = 1; i < c; i++)
+        for (int i = 1; i < c; i++)
         {
             //in case of -n was passed on cmd line
             if (!strcmp("-n", arg[i]))
+            {
                 if (atoi(arg[i + 1]) > 0 && !(isdigit(atoi(arg[i + 1]))))
                 {
                     *n = atoi(arg[i + 1]);
@@ -42,6 +48,7 @@ void arg_check(int c, char const *arg[], bool *plus, long *n, int *fpos)
                     fprintf(stderr, "TAIL: Unexpected value for option -n passed.\n");
                     exit(-1);
                 }
+            }
             //testing if file was passed or not
             if (strchr(arg[i], '.'))
                 *fpos = i;
@@ -72,7 +79,7 @@ int count_lines(FILE *f)
 }
 
 /* Printing selected lines */
-int print_lines(long lc, bool plus, long n, FILE *f)
+void print_lines(unsigned int lc, bool plus, unsigned int n, FILE *f)
 {
     //variables
     char c;
@@ -116,7 +123,7 @@ int print_lines(long lc, bool plus, long n, FILE *f)
 int main(int argc, char const *argv[])
 {
     //variables
-    long n = LINECOUNTDEFAULT, lc = 0;
+    unsigned int n = LINECOUNTDEFAULT, lc = 0;
     int fpos = STDINPUT;
     bool plus = false;
     FILE *f = stdin;

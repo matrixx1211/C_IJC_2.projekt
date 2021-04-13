@@ -11,7 +11,7 @@ CPPCOMPILER = g++
 CPPFLAGS = -std=c++17 -pedantic -Wall
 
 TAIL = tail
-WORDCOUNT = wordcount
+WORDCOUNT = wordcount-
 
 #############################
 
@@ -24,11 +24,11 @@ all: tail wordcount_cpp
 tail: $(TAIL).c
 	$(COMPILER) $(CFLAGS) $(TAIL).c -o $(TAIL)
 
-wordcount_cpp: $(WORDCOUNT).cpp
-	$(CPPCOMPILER) $(CPPFLAGS) $(WORDCOUNT).cpp -o $(WORDCOUNT)_cpp
+wordcount_cpp: $(WORDCOUNT).cc
+	$(CPPCOMPILER) $(CPPFLAGS) $(WORDCOUNT).cc -o $(WORDCOUNT)
 
 #############################
 
 clear: 
-	rm *.o tail wordcount wordcount-dynamic wordcount_cpp
+	rm *.o tail wordcount wordcount-dynamic wordcount-
 # libhtab.a - libhtab.so

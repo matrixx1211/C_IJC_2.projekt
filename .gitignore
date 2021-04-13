@@ -6,3 +6,6 @@ tail
 io
 wordcount
 wordcount-dynamic
+
+# Test files
+*.txt

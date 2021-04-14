@@ -17,6 +17,8 @@ htab_t *htab_init(size_t n)
     if (!hash_table)
         return NULL; // if not return null
 
+    //set size
+    hash_table->size = 0;
     //set arr_size
     hash_table->arr_size = n;
 

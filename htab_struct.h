@@ -11,7 +11,7 @@
 struct htab {
         int size;
         int arr_size;
-        htab_pair_t ptr[];
+        htab_pair_t *ptr;
     };
 
 #endif

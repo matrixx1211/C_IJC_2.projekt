@@ -6,6 +6,7 @@
 #include <inttypes.h>
 #include "htab.h"
 
+/* calculate hash from str */
 size_t htab_hash_function(const char *str)
 {
     uint32_t h = 0;

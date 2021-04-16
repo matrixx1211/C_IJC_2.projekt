@@ -8,16 +8,25 @@
 
 void htab_clear(htab_t *t)
 {
-    //htab_t *tmp = t;
-    //!prvně htab_lookup_add
+    //temporary ptr to t
+    htab_t *tmp = t;
 
-    /* for (size_t i = 0; i < t->arr_size; i++)
+    //temporary ptr to next because of free
+    htab_item_t *tmpnext;
+
+    //for every array index i
+    for (size_t i = 0; i < tmp->arr_size; i++)
     {
-        while (t->ptr[i]->next != NULL)
+        //go through items on index i in array ptr
+        while (tmp->ptr[i]->next != NULL)
         {
-            
+            //temporary save ptr to next
+            tmpnext = tmp->ptr[i]->next;
+            //because of this free
+            free(tmp->ptr[i]);
+            //set new begin to next
+            tmp->ptr[i] = tmpnext;
         }
         
-    } */
-    
+    }
 }

@@ -9,4 +9,7 @@ wordcount-dynamic
 
 # Test files
 *.txt
-/TEST
+TEST
+
+# Project files
+.vscode

@@ -9,3 +9,4 @@ wordcount-dynamic
 
 # Test files
 *.txt
+/TEST

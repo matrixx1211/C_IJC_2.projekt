@@ -27,6 +27,20 @@ tail: $(TAIL).c
 wordcount_cpp: $(WORDCOUNT).cc
 	$(CPPCOMPILER) $(CPPFLAGS) $(WORDCOUNT).cc -o $(WORDCOUNT)
 
+#htab_bucket_count.c
+#htab_clear.c
+#htab_erase.c
+#htab_find.c
+#htab_for_each.c
+#htab_free.c
+#htab_hash_function.c
+#htab_init.c
+#htab_lookup_add.c
+#htab_move.c
+#htab_size.c
+#htab_struct.h
+
+
 #############################
 
 clear: 

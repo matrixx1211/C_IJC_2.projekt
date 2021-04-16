@@ -11,24 +11,21 @@
 htab_t *htab_init(size_t n)
 {
     //alloc memory for table
-    htab_t *hash_table = malloc((sizeof(htab_t) + (n * sizeof(htab_pair_t))));
+    htab_t *t = malloc((sizeof(htab_t) + (n * sizeof(htab_item_t))));
 
     //check if alloc success
-    if (!hash_table)
+    if (!t)
         return NULL; // if not return null
 
     //set size
-    hash_table->size = 0;
+    t->size = 0;
     //set arr_size
-    hash_table->arr_size = n;
+    t->arr_size = n;
 
     //initialize array
     for (size_t i = 0; i < n; i++)
-    {
-        hash_table->ptr[i].key = NULL;
-        hash_table->ptr[i].value = 0;
-    }
+        t->ptr[i] = NULL;
 
     // if malloc success return structure
-    return hash_table;
+    return t;
 }

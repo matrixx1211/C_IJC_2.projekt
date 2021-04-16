@@ -9,9 +9,18 @@
 #include "htab.h"
 
 struct htab {
-        int size;
-        int arr_size;
-        htab_pair_t *ptr;
+        //count of records
+        size_t size;
+        //size of array
+        size_t arr_size;
+        //array of htab_pair_t
+        htab_item_t *ptr[];
     };
 
-#endif
+typedef struct htab_item
+{
+    htab_pair_t item;
+    htab_item_t *next;
+} htab_item_t;
+
+#endif //__HTAB_H_STRUCT__

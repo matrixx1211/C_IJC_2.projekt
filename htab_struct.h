@@ -8,6 +8,14 @@
 
 #include "htab.h"
 
+typedef struct htab_item htab_item_t;
+struct htab_item
+{
+    htab_pair_t item;
+    htab_item_t *next;
+}; 
+
+
 struct htab {
         //count of records
         size_t size;
@@ -17,10 +25,5 @@ struct htab {
         htab_item_t *ptr[];
     };
 
-typedef struct htab_item
-{
-    htab_pair_t item;
-    htab_item_t *next;
-} htab_item_t;
 
 #endif //__HTAB_H_STRUCT__

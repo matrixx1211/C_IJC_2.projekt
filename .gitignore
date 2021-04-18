@@ -13,3 +13,7 @@ TEST
 
 # Project files
 .vscode
+
+# Libs
+*.a
+*.so

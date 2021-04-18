@@ -13,24 +13,29 @@ bool htab_erase(htab_t *t, htab_key_t key)
 {
     //find if record with key exist or not
     htab_pair_t *exist = htab_find(t, key);
-    
+
     //if not exist
     if (exist == NULL)
         //if erase was not successful
         return false;
 
-    //temporary ptr to table t
-    htab_t *tmp = t;
-
+    
     //find
-    for (size_t i = 0; i < t->arr_size; i++)
+    /* for (size_t i = 0; i < t->arr_size; i++)
     {
-        while (exist != &tmp->ptr[i]->item)
+        while (exist != &tberased->item && tberased->next != NULL)
         {
-            //TODO: předělat next smazaného na předchozí, free záznam 
-            tmp->ptr[i] = tmp->ptr[i]->next; 
+            tberased = tberased->next;
         }
+        if (exist == &tberased->item)
+            break;
     }
+    
+    t->ptr[begin_i] = newfirst;
+
+    free((char *)tberased->item.key);
+
+    free(tberased); */
 
     //if erase was successful
     return true;

@@ -82,7 +82,7 @@ int count_lines(FILE *f)
 void print_lines(unsigned int lc, bool plus, unsigned int n, FILE *f)
 {
     //variables
-    char c;
+    int c;
     int begin = 0, ll = 0, cl = 0;
     //checking if + is passed
     if (plus)

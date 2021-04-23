@@ -9,7 +9,7 @@
 #include "io.h"
 
 #define MAXWORD 128
-#define HTAB_SIZE 255 //! i choose this size because of (2^8-1)
+#define HTAB_SIZE 255 //! i chose this size because of (2^8-1)
 
 void print(htab_pair_t *data)
 {
@@ -53,7 +53,25 @@ int main()
         }
     }
 
-    htab_erase(t, "-");
+    #ifdef MOVETEST
+        //print old size
+        printf("Size of old table: %ld\n", htab_bucket_count(t));
+
+        //print old table
+        htab_for_each(t, print);
+
+        //make new table
+        htab_t *t2 = htab_move(HTAB_SIZE*2, t);
+
+        //free memory of old table
+        htab_free(t);
+        
+        //set ptr of new table to old table
+        t = t2;
+
+        //print new size
+        printf("Size of new table: %ld\n", htab_bucket_count(t));
+    #endif
 
     //print every record in hash table
     htab_for_each(t, print);

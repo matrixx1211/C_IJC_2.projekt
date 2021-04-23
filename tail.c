@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "tail.h"
 
 /* 511 chars + 0 */
 #define LINELENGTH 512

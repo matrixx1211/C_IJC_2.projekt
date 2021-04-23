@@ -35,5 +35,9 @@ void htab_clear(htab_t *t)
             //set new begin to next
             tmp = tmpnext;
         }
+        //set ptr to NULL 
+        tmp = NULL;
     }
+    //set count of items to 0 
+    t->size = 0;
 }

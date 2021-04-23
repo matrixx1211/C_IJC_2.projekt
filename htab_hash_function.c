@@ -4,7 +4,6 @@
 // School:      VUT FIT Brno
 
 #include <inttypes.h>
-#include <stdio.h>
 #include "htab.h"
 
 /* calculate hash from str */
@@ -15,10 +14,8 @@ size_t htab_hash_function(const char *str)
     //djb2 algorithm
     unsigned long hash = 5381;
     int c;
-
     while ((c = *str++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
-
     return hash;
 
 #else

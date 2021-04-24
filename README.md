@@ -1,13 +1,15 @@
 # C_IJC_2.projekt
 2. projekt do předmětu IJC
-## 1. úkol - TAIL
+
+## 1. úkol
 Tiskne posledních 10 řádků nebo -n řádků ze **souboru** nebo ze **stdin**. 
 - při spuštění tail s -n +N -> tiskne od řádku N do konce
 - při spuštění tail s -n N -> tiskne posledních N řádků
 - při spuštění tail bez -n N -> vypíše posledních 10 řádků
 - při spuštění tail bez SOUBOR -> čte ze stdin 
-- [ ] tail.c **Přepsat ještě**
-- [ ] tail.h
+### TAIL
+- [x] tail.c
+- [x] tail.h
 
 ## 2. úkol
 ### WORDCOUNT

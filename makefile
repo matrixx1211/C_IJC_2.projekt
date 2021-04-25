@@ -22,7 +22,7 @@ ZIPNAME = xbitom00
 #############################
 all: tail libhtab.a libhtab.so wordcount wordcount-dynamic
 
-everything: all wordcount- movetest movetest-dynamic hashtest hashtest-dynamic pack
+everything: all movetest movetest-dynamic hashtest hashtest-dynamic pack wordcount-
 #############################
 
 

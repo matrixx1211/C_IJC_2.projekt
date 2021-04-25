@@ -5,7 +5,7 @@
 #############################
 
 COMPILER = gcc
-CFLAGS = -std=c99 -pedantic -Wall -Wextra -g # bcs of VALGRIND and DBG 
+CFLAGS = -std=c99 -pedantic -Wall -Wextra # -g # bcs of VALGRIND and DBG 
 
 CPPCOMPILER = g++
 CPPFLAGS = -std=c++17 -pedantic -Wall
@@ -14,11 +14,15 @@ HTAB_FILES = htab_bucket_count.c htab_clear.c htab_erase.c htab_find.c htab_for_
 
 HTAB_OFILES = htab_bucket_count.o htab_clear.o htab_erase.o htab_find.o htab_for_each.o htab_free.o  htab_hash_function.o htab_init.o htab_lookup_add.o htab_move.o htab_size.o
 
+ZIPNAME = xbitom00
+
 .PHONY: all clear
 
 
 #############################
 all: tail libhtab.a libhtab.so wordcount wordcount-dynamic
+
+everything: all wordcount- movetest movetest-dynamic hashtest hashtest-dynamic pack
 #############################
 
 
@@ -107,7 +111,17 @@ libhtab-hashtest.so: $(HTAB_FILES) htab.h htab_struct.h
 # ETC - clear, zip
 #############################
 pack: *.c *.h Makefile
-	zip xbitom00.zip $^
+	zip $(ZIPNAME).zip $^
 
-clear: 
-	rm *.o tail wordcount wordcount-dynamic wordcount- libhtab.a libhtab.so xbitom00.zip movetest movetest-dynamic hashtest hashtest-dynamic libhtab-hashtest.a libhtab-hashtest.so
+clear: clear-created
+
+clear-all: clear-created clear-pack
+
+clear-created: 
+	rm -f *.o tail wordcount wordcount-dynamic wordcount- libhtab.a libhtab.so movetest movetest-dynamic hashtest hashtest-dynamic libhtab-hashtest.a libhtab-hashtest.so
+
+clear-pack:
+	rm -f $(ZIPNAME).zip
+
+
+
